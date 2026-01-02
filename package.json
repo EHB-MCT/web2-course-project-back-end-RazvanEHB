@@ -1,0 +1,25 @@
+{
+  "name": "web2-course-project-back-end-razvanehb",
+  "version": "1.0.0",
+  "description": "[![Open in Codespaces](https://classroom.github.com/assets/launch-codespace-2972f46106e565e64193e422d61a12cf1da4916b45550586e14ef0a7c637dd04.svg)](https://classroom.github.com/open-in-codespaces?assignment_repo_id=21890973)\r # CelesTune ✨\r CelesTune is a website that aims to combine astronomy, weather, and music into one package. The website tracks your approximate location on the planet, and depending on your night sky and weather, it will generate a music playlist.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EHB-MCT/web2-course-project-back-end-RazvanEHB.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EHB-MCT/web2-course-project-back-end-RazvanEHB/issues"
+  },
+  "homepage": "https://github.com/EHB-MCT/web2-course-project-back-end-RazvanEHB#readme",
+  "dependencies": {
+    "body-parser": "^2.2.1",
+    "cors": "^2.8.5",
+    "express": "^5.2.1"
+  }
+}
