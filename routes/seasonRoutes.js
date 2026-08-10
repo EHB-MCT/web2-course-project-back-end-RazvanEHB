@@ -35,7 +35,7 @@ router.delete('/:id', async (req, res) => {
                 message: `Season with ID ${req.params.id} not found, and could not be deleted.`
             });
         }
-        res.json({
+        res.status(200).json({
             message: 'Season deleted successfully.',
         });
     } catch (err) {
@@ -80,7 +80,7 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
     try {
-        if (!VALID_SEASONS.includes(req.body.season)) {
+        if (req.body.season !== undefined && !VALID_SEASONS.includes(req.body.season)) {
             return res.status(400).json({
                 error: 'Bad Request',
                 message: `Season must be one of: ${VALID_SEASONS.join(', ')}.`
@@ -105,5 +105,7 @@ router.put('/:id', async (req, res) => {
         })
     }
 });
+
+
 
 module.exports = router;
