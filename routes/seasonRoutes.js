@@ -116,16 +116,12 @@ router.get ('/', async (req, res) => {
 
         const sortOptions = sortMap[req.query.sortBy] || {};
 
-        const seasons = await ImportSeason.find({}).sort(sortOptions);
-
-        const filterByMood = req.query.mood;
-        if (filterByMood) {
-            const filteredSeasons = seasons.filter(season => season.mood === filterByMood);
-            return res.status(200).json({
-                message: 'Seasons retrieved successfully.',
-                data: filteredSeasons
-            });
+        const filterOptions = {};
+        if (req.query.filterByMood) {
+            filterOptions.mood = req.query.filterByMood;
         }
+
+        const seasons = await ImportSeason.find(filterOptions).sort(sortOptions);
 
         res.status(200).json({
             message: 'Seasons retrieved successfully.',
