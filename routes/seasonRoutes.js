@@ -106,6 +106,38 @@ router.put('/:id', async (req, res) => {
     }
 });
 
+router.get ('/', async (req, res) => {
+    try {
+        const sortMap = {
+            luminosity: { luminosityLevel: 1 },
+            season: { startMonth: 1 },
+            startMonth: { startMonth: 1 }
+        };
 
+        const sortOptions = sortMap[req.query.sortBy] || {};
+
+        const seasons = await ImportSeason.find({}).sort(sortOptions);
+
+        const filterByMood = req.query.mood;
+        if (filterByMood) {
+            const filteredSeasons = seasons.filter(season => season.mood === filterByMood);
+            return res.status(200).json({
+                message: 'Seasons retrieved successfully.',
+                data: filteredSeasons
+            });
+        }
+
+        res.status(200).json({
+            message: 'Seasons retrieved successfully.',
+            data: seasons
+        });
+
+    } catch (err) {
+        res.status(500).json({
+            error: 'Internal Server Error',
+            message: 'Request could not be processed due to an internal server error.'
+        })
+    }
+});
 
 module.exports = router;
