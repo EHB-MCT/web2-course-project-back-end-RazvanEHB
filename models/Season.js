@@ -12,4 +12,6 @@ const seasonSchema = new mongoose.Schema({
   illustrationTheme: String,
 });
 
+module.exports = mongoose.model('Season', seasonSchema);
+
 seasonSchema.plugin(AutoIncrement, { inc_field: 'id' });
