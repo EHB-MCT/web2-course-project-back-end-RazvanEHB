@@ -78,4 +78,32 @@ router.post('/', async (req, res) => {
     }
 });
 
+router.put('/:id', async (req, res) => {
+    try {
+        if (!VALID_SEASONS.includes(req.body.season)) {
+            return res.status(400).json({
+                error: 'Bad Request',
+                message: `Season must be one of: ${VALID_SEASONS.join(', ')}.`
+            });
+        }
+        
+        const updatedSeason = await ImportSeason.findOneAndUpdate({ id: Number(req.params.id) }, req.body, { new: true });
+        if (!updatedSeason) {
+            return res.status(404).json({
+                error: 'Not Found',
+                message: `Season with ID ${req.params.id} not found.`
+            });
+        }
+        res.status(200).json({
+            message: 'Season updated successfully.',
+            data: updatedSeason
+        });
+    } catch (err) {
+        res.status(500).json({
+            error: 'Internal Server Error',
+            message: 'Request could not be processed due to an internal server error.'
+        })
+    }
+});
+
 module.exports = router;
