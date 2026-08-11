@@ -19,7 +19,6 @@ seasonSchema.pre('save', async function () {
     if (this.isNew) {
         const lastSeason = await this.constructor.find().sort({ id: -1 }).limit(1);
         this.id = lastSeason.length > 0 ? lastSeason[0].id + 1 : 1;
-        console.log('Assigned id:', this.id); // temporary debug line
     }
 });
 
