@@ -12,7 +12,11 @@ async function getAccessToken() {
     
     const encoded = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
 
-    const body = new URLSearchParams({ grant_type: 'client_credentials' });
+    // const body = new URLSearchParams({ grant_type: 'client_credentials' });
+    const body = new URLSearchParams({
+        grant_type: 'refresh_token',
+        refresh_token: process.env.SPOTIFY_REFRESH_TOKEN
+    });
 
     const response = await fetch('https://accounts.spotify.com/api/token', {
         method: 'POST',
