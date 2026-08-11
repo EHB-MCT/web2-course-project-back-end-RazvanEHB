@@ -122,6 +122,16 @@ router.get ('/', async (req, res) => {
         }
 
         const seasons = await ImportSeason.find(filterOptions).sort(sortOptions);
+        
+        function isMonthInSeason(month, season) {
+            if (season.startMonth <= season.endMonth) {
+                return month >= season.startMonth && month <= season.endMonth;
+            } else {
+                return month >= season.startMonth || month <= season.endMonth;
+            }
+        }
+
+        const monthNumber = Number(req.query.filterByMonth);        
 
         res.status(200).json({
             message: 'Seasons retrieved successfully.',
