@@ -42,7 +42,21 @@ async function getPlaylistTracks(playlistId) {
         }
     });
     const playlistData = await response.json();
-    return playlistData;
+
+    const simplifiedAPIResponse = playlistData.items.map(item => {
+        const track = item.item;
+        const artistNames = track.artists.map(artist => artist.name).join(', ');
+
+        return {
+            id: track.id,
+            name: track.name,
+            artists: artistNames,
+            albumArt: track.album.images[0]?.url,
+            url: track.external_urls.spotify,
+        };
+    });
+
+    return simplifiedAPIResponse;
 }
 
 module.exports = { getAccessToken, getPlaylistTracks };
