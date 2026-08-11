@@ -30,4 +30,15 @@ async function getAccessToken() {
     return accessToken;
 }
 
-module.exports = getAccessToken;
+async function getPlaylistTracks(playlistId) {
+    const token = await getAccessToken();
+    const response = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    });
+    const playlistData = await response.json();
+    return playlistData;
+}
+
+module.exports = { getAccessToken, getPlaylistTracks };
