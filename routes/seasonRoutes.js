@@ -105,6 +105,7 @@ router.post('/', async (req, res) => {
             data: newSeason
         });
     } catch (err) {
+        console.error(err); // temporary, for debugging
         res.status(500).json({
             error: 'Internal Server Error',
             message: 'Request could not be processed due to an internal server error.'
