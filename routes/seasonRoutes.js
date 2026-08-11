@@ -4,6 +4,40 @@ const router = express.Router();
 
 const VALID_SEASONS = ['Winter', 'Spring', 'Summer', 'Autumn'];
 
+function isMonthInSeason(month, season) {
+    if (season.startMonth <= season.endMonth) {
+        return month >= season.startMonth && month <= season.endMonth;
+    } else {
+        return month >= season.startMonth || month <= season.endMonth;
+    }
+}  
+
+router.get('/current', async (req, res) => {
+    try {
+
+        const currentMonth = new Date().getMonth() + 1; // because JavaScript months are 0-indexed
+        const seasons = await ImportSeason.find();
+        const currentSeason = seasons.find(season => isMonthInSeason(currentMonth, season));
+        
+        if (!currentSeason) {
+            return res.status(404).json({
+                error: 'Not Found',
+                message: 'Current season not found.'
+            });
+        } else {
+            res.status(200).json({
+                message: 'Current season retrieved successfully.',
+                data: currentSeason
+            });
+        }
+
+    } catch (err) {
+        res.status(500).json({
+            error: 'Internal Server Error',
+            message: 'Request could not be processed due to an internal server error.'
+        })
+    }
+});
 
 router.get('/:id', async (req, res) => {
     try {
@@ -14,7 +48,7 @@ router.get('/:id', async (req, res) => {
                 message: `Season with ID ${req.params.id} not found.`
             });
         }
-        res.json({
+        res.status(200).json({
             message: 'Season retrieved successfully.',
             data: season
         });
@@ -121,17 +155,12 @@ router.get ('/', async (req, res) => {
             filterOptions.mood = req.query.filterByMood;
         }
 
-        const seasons = await ImportSeason.find(filterOptions).sort(sortOptions);
-        
-        function isMonthInSeason(month, season) {
-            if (season.startMonth <= season.endMonth) {
-                return month >= season.startMonth && month <= season.endMonth;
-            } else {
-                return month >= season.startMonth || month <= season.endMonth;
-            }
-        }
+        let seasons = await ImportSeason.find(filterOptions).sort(sortOptions);
 
-        const monthNumber = Number(req.query.filterByMonth);        
+        if (req.query.filterByMonth) {
+            const monthNumber = Number(req.query.filterByMonth);
+            seasons = seasons.filter(season => isMonthInSeason(monthNumber, season));
+        }    
 
         res.status(200).json({
             message: 'Seasons retrieved successfully.',
@@ -145,5 +174,7 @@ router.get ('/', async (req, res) => {
         })
     }
 });
+
+
 
 module.exports = router;
