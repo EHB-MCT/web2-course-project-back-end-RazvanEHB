@@ -32,7 +32,7 @@ async function getAccessToken() {
 
 async function getPlaylistTracks(playlistId) {
     const token = await getAccessToken();
-    const response = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
+    const response = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/items`, {
         headers: {
             'Authorization': `Bearer ${token}`
         }
