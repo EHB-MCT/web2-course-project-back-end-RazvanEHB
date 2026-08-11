@@ -84,6 +84,7 @@ router.post('/', async (req, res) => {
     try {
         if (req.body.season === "Stay") {
             return res.status(200).json({
+                spotifyPlaylistId: "4zO3S8u7pbKce09domQ7E0",
                 message: 'It says stay, dad.',
                 mood: "Docking Sequence",
                 musicTag: "interstellar-soundtrack",

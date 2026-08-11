@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const seasonSchema = new mongoose.Schema(
   {
   id: { type: Number, unique: true },
+  spotifyPlaylistId: { type: String, required: true, unique: true },
   season: { type: String, required: true },
   sky: { type: String, required: true },
   mood: { type: String, required: true },
