@@ -26,9 +26,13 @@ router.get('/current', async (req, res) => {
                 message: 'Current season not found.'
             });
         } else {
+            const tracks = await getPlaylistTracks(currentSeason.spotifyPlaylistId);
             res.status(200).json({
-                message: 'Current season retrieved successfully.',
-                data: currentSeason
+                message: 'Current season and tracks retrieved successfully.',
+                data:{
+                    ...currentSeason.toObject(),
+                    tracks: tracks
+                },
             });
         }
 
