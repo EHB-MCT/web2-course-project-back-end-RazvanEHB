@@ -116,8 +116,8 @@ router.post('/', async (req, res) => {
                 spotifyPlaylistId: "4zO3S8u7pbKce09domQ7E0",
                 message: 'It says stay, dad.',
                 mood: "Docking Sequence",
-                musicTag: "interstellar-soundtrack",
-                illustrationTheme: "interstellar",
+                musicTag: "Interstellar Soundtrack",
+                illustrationTheme: "Interstellar",
             });
         }
 
