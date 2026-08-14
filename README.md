@@ -10,4 +10,4 @@ Live link: [website.be](website.be) (to be added)
 
 - [Routing with Express] → [https://expressjs.com/en/5x/guide/routing/] used in routes > seasonRoutes.js
 
-- [Claude Mentoring Chat] → [TO BE ADDED]
+- [Claude Mentoring Chat] → [https://claude.ai/share/291ba8a7-7d72-446b-acf1-aed584a0b1cf]
