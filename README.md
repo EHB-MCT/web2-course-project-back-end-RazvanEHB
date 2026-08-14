@@ -5,3 +5,9 @@ CelesTune is a website that aims to combine astronomy, weather, and music into o
 Live link: [website.be](website.be) (to be added)
 
 ## Sources 🗃️
+
+- [Mongoose Schemas] → [https://mongoosejs.com/docs/guide.html] used in models > Season.js
+
+- [Routing with Express] → [https://expressjs.com/en/5x/guide/routing/] used in routes > seasonRoutes.js
+
+- [Claude Mentoring Chat] → [TO BE ADDED]
